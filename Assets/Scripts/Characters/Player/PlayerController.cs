@@ -2,20 +2,22 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _walkSpeed = 5f;
     [SerializeField] private float _runSpeed = 8f;
+    [SerializeField] private float _airWalkSpeed = 3f;
+    [SerializeField] private float _jumpImpuls = 10f;
 
     private Vector2 _moveInput;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+    private TouchingDirections _touchingDirection;
 
     private bool _isMoving = false;
     private bool _isRunning = false;
-    private bool _isFacingRight = true;
+    private bool _isFacingRight = true;    
 
     public bool IsMoving
     {
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
         private set
         {
             _isMoving = value;
-            _animator.SetBool("isMoving", value);
+            _animator.SetBool(AnimationStrings.isMoving, value);
         }
     }
 
@@ -39,19 +41,24 @@ public class PlayerController : MonoBehaviour
         private set
         {
             _isRunning = value;
-            _animator.SetBool("isRunning", value);
+            _animator.SetBool(AnimationStrings.isRunning, value);
         }
     }
     public float CurrentMoveSpeed
     {
         get
         {
-            if (_isMoving)
+            if(_touchingDirection.IsGrounded)
             {
-                if (_isRunning)
-                    return _runSpeed;
+                if (IsMoving && !_touchingDirection.IsOnWall)
+                {
+                    if (IsRunning)
+                        return _runSpeed;
+                    else
+                        return _walkSpeed;
+                }
                 else
-                    return _walkSpeed;
+                    return _airWalkSpeed;
             }
             else
                 return 0f;
@@ -76,11 +83,14 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _touchingDirection = GetComponent<TouchingDirections>();
     }
 
     private void FixedUpdate()
     {
         _rigidbody.velocity = new Vector2(_moveInput.x * CurrentMoveSpeed, _rigidbody.velocity.y);
+
+        _animator.SetFloat(AnimationStrings.yVelocity, _rigidbody.velocity.y);
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -112,6 +122,16 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             IsRunning = false;
+        }
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if(context.started && _touchingDirection.IsGrounded)
+        {
+            _animator.SetTrigger(AnimationStrings.jump);
+
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpImpuls);
         }
     }
 }
