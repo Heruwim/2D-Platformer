@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private bool _isMoving = false;
     private bool _isRunning = false;
-    private bool _isFacingRight = true;    
+    private bool _isFacingRight = true;
 
     public bool IsMoving
     {
@@ -48,9 +48,9 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            if(_touchingDirection.IsGrounded)
+            if (IsMoving && !_touchingDirection.IsOnWall)
             {
-                if (IsMoving && !_touchingDirection.IsOnWall)
+                if (_touchingDirection.IsGrounded)
                 {
                     if (IsRunning)
                         return _runSpeed;
@@ -65,13 +65,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool IsFacingRight { get
+    public bool IsFacingRight
+    {
+        get
         {
             return _isFacingRight;
         }
         private set
         {
-            if(_isFacingRight != value)
+            if (_isFacingRight != value)
             {
                 transform.localScale *= new Vector2(-1, 1);
             }
@@ -103,19 +105,19 @@ public class PlayerController : MonoBehaviour
 
     private void SetFacingDirection(Vector2 moveInput)
     {
-        if(moveInput.x > 0 && !IsFacingRight)
+        if (moveInput.x > 0 && !IsFacingRight)
         {
             IsFacingRight = true;
         }
-        else if(moveInput.x < 0 && IsFacingRight)
+        else if (moveInput.x < 0 && IsFacingRight)
         {
-            IsFacingRight= false;
+            IsFacingRight = false;
         }
     }
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if (context.started)
         {
             IsRunning = true;
         }
@@ -127,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.started && _touchingDirection.IsGrounded)
+        if (context.started && _touchingDirection.IsGrounded)
         {
             _animator.SetTrigger(AnimationStrings.jump);
 
