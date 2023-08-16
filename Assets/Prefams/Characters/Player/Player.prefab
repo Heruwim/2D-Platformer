@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8470840130584658591}
   - component: {fileID: 7579008350383852231}
   - component: {fileID: 3047301976108603755}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 06cbdc7319a31414bac389078f49d3e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkSpeed: 5
   _runSpeed: 8
+  _airWalkSpeed: 3
   _jumpImpuls: 10
 --- !u!114 &3340265290400323196
 MonoBehaviour:
@@ -178,7 +179,19 @@ MonoBehaviour:
     m_ActionId: 3d7c56e9-d607-4c2b-937b-5abb55159d85
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2589685148390194084}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f77ee153-c616-4e38-8447-4ff1e56520a4
     m_ActionName: Player/Attack[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -328,14 +341,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _castFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
