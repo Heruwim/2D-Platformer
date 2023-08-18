@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(TouchingDirections))]
+[RequireComponent (typeof(Damageable))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _walkSpeed = 5f;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private TouchingDirections _touchingDirection;
+    private Damageable _damageable;
 
     private bool _isMoving = false;
     private bool _isRunning = false;
@@ -94,16 +96,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool IsAlive
+    {
+        get
+        {
+            return _animator.GetBool(AnimationStrings.isAlive);
+        }
+    }
+
+    
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _touchingDirection = GetComponent<TouchingDirections>();
+        _damageable = GetComponent<Damageable>();
     }
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector2(_moveInput.x * CurrentMoveSpeed, _rigidbody.velocity.y);
+        if (!_damageable.LockVelocity)
+            _rigidbody.velocity = new Vector2(_moveInput.x * CurrentMoveSpeed, _rigidbody.velocity.y);
 
         _animator.SetFloat(AnimationStrings.yVelocity, _rigidbody.velocity.y);
     }
@@ -111,9 +125,14 @@ public class PlayerController : MonoBehaviour
     {
         _moveInput = context.ReadValue<Vector2>();
 
-        IsMoving = _moveInput != Vector2.zero;
+        if (IsAlive)
+        {
+            IsMoving = _moveInput != Vector2.zero;
 
-        SetFacingDirection(_moveInput);
+            SetFacingDirection(_moveInput);
+        }
+        else
+            IsMoving = false;
     }
 
     private void SetFacingDirection(Vector2 moveInput)
@@ -156,5 +175,10 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetTrigger(AnimationStrings.attackTrigger);
         }
+    }
+
+    public void OnHit(int damage, Vector2 knockback)
+    {
+        _rigidbody.velocity = new Vector2(knockback.x, _rigidbody.velocity.y + knockback.y);
     }
 }
