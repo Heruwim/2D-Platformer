@@ -5,8 +5,9 @@ using UnityEngine;
 public class Knight : MonoBehaviour
 {
     [SerializeField] private float _walkSpeed = 3f;
-    [SerializeField] private DetectionZone _attackZone;
     [SerializeField] private float _wolkStopRate = 0.05f;
+    [SerializeField] private DetectionZone _attackZone;
+    [SerializeField] private DetectionZone _cliffDetectionZone;
 
     private Rigidbody2D _rigidbody;
     private WalkableDirection _walkDirection;
@@ -60,6 +61,18 @@ public class Knight : MonoBehaviour
         }
     }
 
+    public float AttackCooldown
+    {
+        get
+        {
+            return _animator.GetFloat(AnimationStrings.attackCooldown);
+        }
+        private set
+        {
+            _animator.SetFloat(AnimationStrings.attackCooldown, Mathf.Max(value, 0));
+        }
+    }
+
     public enum WalkableDirection
     {
         Right,
@@ -77,6 +90,10 @@ public class Knight : MonoBehaviour
     private void Update()
     {
         HasTarget = _attackZone.DetectedColliders.Count > 0;
+        if (AttackCooldown > 0)
+        {
+            AttackCooldown -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -114,5 +131,13 @@ public class Knight : MonoBehaviour
     public void OnHit(int damage, Vector2 knockback)
     {
         _rigidbody.velocity = new Vector2(knockback.x, _rigidbody.velocity.y + knockback.y);
+    }
+
+    public void OnCliffDetected()
+    {
+        if(_touchingDirections.IsGrounded)
+        {
+            FlipDirection();
+        }
     }
 }
