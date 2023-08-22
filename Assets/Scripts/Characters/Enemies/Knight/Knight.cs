@@ -4,7 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class Knight : MonoBehaviour
 {
-    [SerializeField] private float _walkSpeed = 3f;
+    [SerializeField] private float _walkAcceleration = 30f;
+    [SerializeField] private float _maxSpeed = 3f;
     [SerializeField] private float _wolkStopRate = 0.05f;
     [SerializeField] private DetectionZone _attackZone;
     [SerializeField] private DetectionZone _cliffDetectionZone;
@@ -106,7 +107,10 @@ public class Knight : MonoBehaviour
         if (!_damageable.LockVelocity)
         {
             if (CanMove)
-                _rigidbody.velocity = new Vector2(_walkSpeed * _walkDirectionVector.x, _rigidbody.velocity.y);
+                
+                _rigidbody.velocity = new Vector2(
+                    Mathf.Clamp(_rigidbody.velocity.x + (_walkAcceleration * _walkDirectionVector.x * Time.fixedDeltaTime),
+                    -_maxSpeed, _maxSpeed), _rigidbody.velocity.y);
             else
                 _rigidbody.velocity = new Vector2(Mathf.Lerp(_rigidbody.velocity.x, 0, _wolkStopRate), _rigidbody.velocity.y);
         }

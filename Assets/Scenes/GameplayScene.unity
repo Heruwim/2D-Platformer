@@ -12637,6 +12637,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 4924858924902927769, guid: b887153b89ee2db42bf2874544272e2d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7251150976768584091, guid: b887153b89ee2db42bf2874544272e2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12847,6 +12851,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 40120310063323586, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
+      propertyPath: _knockback.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5027677281577172792, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -12889,6 +12897,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5565572173057791737, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5611103043887561154, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
+      propertyPath: _knockback.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672329541720938648, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
