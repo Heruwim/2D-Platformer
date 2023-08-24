@@ -12783,6 +12783,10 @@ PrefabInstance:
       propertyPath: NoCollidersRemain.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4418385767654747290, guid: 2a0d6e4b90f914040a9f545b8eb59b1a, type: 3}
+      propertyPath: _walkAcceleration
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6658147504446374474, guid: 2a0d6e4b90f914040a9f545b8eb59b1a, type: 3}
       propertyPath: m_Name
       value: KnightEnemy
@@ -12851,9 +12855,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 40120310063323586, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
-      propertyPath: _knockback.x
-      value: 1
+    - target: {fileID: 4361271865680285584, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5027677281577172792, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
       propertyPath: m_Name
@@ -12899,12 +12903,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5611103043887561154, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
-      propertyPath: _knockback.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6672329541720938648, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 7579008350383852231, guid: a8ccaaffe0115034eb6640152493bedd, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

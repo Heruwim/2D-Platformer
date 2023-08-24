@@ -106,7 +106,7 @@ public class Knight : MonoBehaviour
 
         if (!_damageable.LockVelocity)
         {
-            if (CanMove)
+            if (CanMove && _touchingDirections.IsGrounded)
                 
                 _rigidbody.velocity = new Vector2(
                     Mathf.Clamp(_rigidbody.velocity.x + (_walkAcceleration * _walkDirectionVector.x * Time.fixedDeltaTime),
