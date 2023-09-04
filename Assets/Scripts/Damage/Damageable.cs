@@ -14,6 +14,7 @@ public class Damageable : MonoBehaviour
     private float _timeSinceHit = 0;
 
     public UnityEvent<int, Vector2> DamageableHit;
+    public UnityEvent DemageableDeath;
 
     public int MaxHealth
     {
@@ -45,6 +46,11 @@ public class Damageable : MonoBehaviour
             _isAlive = value;
             _animator.SetBool(AnimationStrings.isAlive, value);
             Debug.Log("Is Alive set " + value);
+
+            if (value == false)
+            {
+                DemageableDeath.Invoke();
+            }
         }
     }
 

@@ -91,6 +91,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DetectedColliders: []
+  NoCollidersRemain:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3386482010186371797
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +239,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DetectedColliders: []
+  NoCollidersRemain:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4418385767654747290}
+        m_TargetAssemblyTypeName: Knight, Assembly-CSharp
+        m_MethodName: OnCliffDetected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &5115489115304342393
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -448,7 +466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585cb3a94e277d7458979583a078f0c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 3
+  _walkAcceleration: 50
+  _maxSpeed: 3
   _wolkStopRate: 0.05
   _attackZone: {fileID: 373321216108582099}
   _cliffDetectionZone: {fileID: 1506782507896758203}
