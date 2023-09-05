@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(TouchingDirections))]
-[RequireComponent (typeof(Damageable))]
+[RequireComponent(typeof(Damageable))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _walkSpeed = 5f;
@@ -23,10 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsMoving
     {
-        get
-        {
-            return _isMoving;
-        }
+        get { return _isMoving; }
         private set
         {
             _isMoving = value;
@@ -36,16 +33,14 @@ public class PlayerController : MonoBehaviour
 
     public bool IsRunning
     {
-        get
-        {
-            return _isRunning;
-        }
+        get { return _isRunning; }
         private set
         {
             _isRunning = value;
             _animator.SetBool(AnimationStrings.isRunning, value);
         }
     }
+
     public float CurrentMoveSpeed
     {
         get
@@ -74,37 +69,28 @@ public class PlayerController : MonoBehaviour
 
     public bool IsFacingRight
     {
-        get
-        {
-            return _isFacingRight;
-        }
+        get { return _isFacingRight; }
         private set
         {
             if (_isFacingRight != value)
             {
                 transform.localScale *= new Vector2(-1, 1);
             }
+
             _isFacingRight = value;
         }
     }
 
     public bool CanMove
     {
-        get
-        {
-            return _animator.GetBool(AnimationStrings.canMove);
-        }
+        get { return _animator.GetBool(AnimationStrings.canMove); }
     }
 
     public bool IsAlive
     {
-        get
-        {
-            return _animator.GetBool(AnimationStrings.isAlive);
-        }
+        get { return _animator.GetBool(AnimationStrings.isAlive); }
     }
 
-    
 
     private void Awake()
     {
@@ -121,6 +107,7 @@ public class PlayerController : MonoBehaviour
 
         _animator.SetFloat(AnimationStrings.yVelocity, _rigidbody.velocity.y);
     }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
@@ -175,7 +162,9 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetTrigger(AnimationStrings.attackTrigger);
         }
-    }public void OnRangedAttack(InputAction.CallbackContext context)
+    }
+
+    public void OnRangedAttack(InputAction.CallbackContext context)
     {
         if (context.started)
         {
