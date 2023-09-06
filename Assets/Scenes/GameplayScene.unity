@@ -12889,14 +12889,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4709353882555577942, guid: a15ada4c747a1c644b60f45f29e4bfa1, type: 3}
-      propertyPath: _gameCanvas
-      value: 
-      objectReference: {fileID: 1587456242}
     - target: {fileID: 9096969468606422343, guid: a15ada4c747a1c644b60f45f29e4bfa1, type: 3}
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 9149621506799744451, guid: a15ada4c747a1c644b60f45f29e4bfa1, type: 3}
+      propertyPath: m_UIInputModule
+      value: 
+      objectReference: {fileID: 2112089134}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

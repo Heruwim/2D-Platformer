@@ -49,7 +49,7 @@ public class Damageable : MonoBehaviour
 
             if (value == false)
             {
-                DemageableDeath.Invoke();
+                DemageableDeath?.Invoke();
             }
         }
     }
